@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend  # Set context to the frontend directory
+      dockerfile: Dockerfile  # Use the Dockerfile located in the frontend folder
+    ports:
+      - "3000:3000"  # Expose frontend to localhost:3000
+    environment:
+      - NEXT_PUBLIC_AUTH_URL=http://auth-service:5001  # Auth API URL
+      - NEXT_PUBLIC_USER_URL=http://user-service:4201  # User API URL
+    depends_on:
+      - auth-service
+      - user-service
+    networks:
+      - app-network
+
+  user-service:
+    build:
+      context: ./user-service  # Path to your user service folder
+      dockerfile: Dockerfile  # Path to the user service Dockerfile
+    ports:
+      - "4201:4201"  # Expose user service to localhost:4201
+    environment:
+      - HTTP_PORT=4201
+      - TCP_AUTH_PORT=5002
+    depends_on:
+      - auth-service
+    networks:
+      - app-network
+
+  auth-service:
+    build:
+      context: ./auth-service  # Path to your auth service folder
+      dockerfile: Dockerfile  # Path to the auth service Dockerfile
+    ports:
+      - "5001:5001"  # Expose auth service to localhost:5001
+    environment:
+      - HTTP_PORT=5001
+      - TCP_PORT=5002
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

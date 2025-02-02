@@ -1,0 +1,63 @@
+# Node.js dependencies (all services)
+node_modules/
+package-lock.json
+
+# Build outputs (all services)
+dist/
+build/
+.next/
+out/
+.cache/
+
+# Logs (all services)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables (all services)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Docker-related files (if needed)
+docker-compose.override.yml
+
+# Editor & OS files (all services)
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+
+# Frontend specific ignores (Next.js/React)
+frontend/.next/
+frontend/out/
+
+# User Service specific (NestJS/Express)
+user-service/node_modules/
+user-service/package-lock.json
+user-service/dist/
+user-service/build/
+user-service/combined.log
+user-service/error.log
+user-service/generated/
+
+# Auth Service specific (NestJS/Express)
+auth-service/node_modules/
+auth-service/package-lock.json
+auth-service/dist/
+auth-service/build/
+auth-service/combined.log
+auth-service/error.log
+
+node_modules/
+.env
+.next/
+dist/

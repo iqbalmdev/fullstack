@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Enable CORS globally
   app.enableCors({
-    origin: 'http://localhost:3000', // Allow requests from localhost:3000
+    origin: 'https://fullstack-ten-gamma.vercel.app/', // Allow requests from localhost:3000
     methods: 'GET, POST, PUT, DELETE, OPTIONS', // Allow these methods
     allowedHeaders: 'Content-Type, Authorization', // Allow these headers
     credentials: true, // Allow credentials

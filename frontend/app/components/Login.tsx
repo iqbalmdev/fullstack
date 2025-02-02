@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { loginUser } from "../../redux/actions/authActions";
@@ -107,7 +107,7 @@ export default function Login() {
 
             {/* Submit Button */}
             <div className="form-control mt-4">
-              <button type="submit" className="btn btn-primary w-full" disabled={isLoading || Object.keys(errors).length > 0}>
+              <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
                 {isLoading ? "Logging in..." : "Log In"}
               </button>
             </div>
@@ -115,12 +115,12 @@ export default function Login() {
 
           {/* Sign Up Link */}
           <div className="mt-4 text-center">
-            <p>
+            {/* <p>
               Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-blue-500 hover:underline">
                 Sign Up
               </Link>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function UsersContainer() {
 
       {/* User List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {users.map((user) => (
+      {Array.isArray(users) ? users?.map((user) => (
           <div key={user?._id} className="card bg-base-100 shadow-xl p-5">
             <div className="card-body">
               <h2 className="card-title">{user.name}</h2>
@@ -77,7 +77,8 @@ export default function UsersContainer() {
               </div>
             </div>
           </div>
-        ))}
+        )):
+        <p>No users found</p>}
       </div>
 
       {/* Delete Confirmation Popup */}

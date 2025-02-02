@@ -13,9 +13,11 @@ async function bootstrap() {
   // Enable CORS for HTTP API
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const CORS_ORIGIN = [
-    'CORS_ORIGIN',
-    'https://fullstack-sandy-zeta.vercel.app/',
-  ]; // CORS origin
+    'http://localhost:3000',
+    'https://fullstack-sandy-zeta.vercel.app',
+    'https://your-new-origin.com', // Add your new origins here
+    'https://another-allowed-origin.com',
+  ];
 
   app.enableCors({
     origin: CORS_ORIGIN,

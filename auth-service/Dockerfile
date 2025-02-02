@@ -5,7 +5,7 @@ FROM node:22-alpine
 WORKDIR /app
 
 # Install necessary system dependencies for bcrypt
-RUN apk add --no-cache python3 make g++ 
+RUN apk add --no-cache python3 make g++
 
 # Copy package.json and install dependencies
 COPY package.json package-lock.json ./

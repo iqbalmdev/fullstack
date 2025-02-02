@@ -6,7 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Auth } from './auth.schema';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
@@ -63,7 +63,6 @@ export class AuthService {
   validateToken(token: string): boolean {
     try {
       // Verify the JWT token
-      console.log("tcp connected")
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       this.jwtService.verify(token, { secret: this.secretKey });
       return true;

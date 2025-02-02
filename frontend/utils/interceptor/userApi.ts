@@ -2,14 +2,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {appEnv} from "../../app/config/varibales"
 
-console.log(appEnv,"See appENv")
-const nodeEnv= process.env.NODE_ENV;
-
-const API_BASE = nodeEnv === 'development' ?   "http://localhost:4201" : 'https://fullstack-zsdg.onrender.com';
 
 // Create an Axios instance
 const userApi = axios.create({
-  baseURL: API_BASE,
+  baseURL: appEnv.USER_URL,
   withCredentials: true,  // This is already correct
   headers: {
     "Content-Type": "application/json",

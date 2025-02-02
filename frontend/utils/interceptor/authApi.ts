@@ -1,12 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import {appEnv} from "../../app/config/varibales"
 
-
-const API_BASE = process.env.NODE_ENV === 'development' ?"http://localhost:5001" : 'https://fullstack-1-gjel.onrender.com'
 
 // Create an Axios instance
+console.log(appEnv.AUTH_URL,"see au url")
 const authApi = axios.create({
-  baseURL: API_BASE, // Ensure this matches the server's base URL
+  baseURL: appEnv.AUTH_URL, // Ensure this matches the server's base URL
   withCredentials: true, // Ensure cookies are sent with the request
   headers: {
     "Content-Type": "application/json",

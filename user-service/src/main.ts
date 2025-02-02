@@ -16,7 +16,7 @@ async function bootstrap() {
   const HTTP_PORT = configService.get<number>('HTTP_PORT', 5001);
   console.log('HTTP_PORT:', HTTP_PORT); // This should log the correct value
 
-  const TCP_AUTH_PORT = configService.get<number>('TCP_AUTH_PORT', 5002); // TCP port for Auth Service
+  // const TCP_AUTH_PORT = configService.get<number>('TCP_AUTH_PORT', 5002); // TCP port for Auth Service
   const CORS_ORIGIN = configService.get<string>(
     'CORS_ORIGIN',
     'https://fullstack-sandy-zeta.vercel.app/',

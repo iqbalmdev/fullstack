@@ -36,15 +36,24 @@ interface User {
 
 
 // Authenticate user function
-export const loginUser = createAsyncThunk<User, { email: string; password: string }, { rejectValue: string }>(
-  'auth/login',
-  async (credentials, { rejectWithValue }) => {
+
+export const loginUser = createAsyncThunk<
+  User,
+  { email: string; password: string; callback: (response?: User) => void },
+  { rejectValue: string }
+>(
+  "auth/login",
+  async ({ email, password, callback }, { rejectWithValue }) => {
     try {
-      const response = await login(credentials?.email, credentials?.password);
-      return response; // Assuming response contains user data & token
+      const response = await login(email, password);
+      callback(response); // Call the callback function after successful login
+      return response;
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
-      return rejectWithValue(axiosError.response?.data?.message || 'Authentication failed');
+      const errorMessage =
+        axiosError.response?.data?.message || "Authentication failed";
+      callback(); // Ensure callback is still called to reset loading state
+      return rejectWithValue(errorMessage);
     }
   }
 );

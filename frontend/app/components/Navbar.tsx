@@ -18,9 +18,10 @@ export default function Navbar() {
 
     // Dispatch the action to set authentication state to false
     dispatch(setAuthFalse());
-
+ 
     // Redirect the user to the login page
     router.push("/");
+    window.location.reload()
   };
 
 

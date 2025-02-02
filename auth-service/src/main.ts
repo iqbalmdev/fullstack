@@ -14,7 +14,7 @@ async function bootstrap() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const CORS_ORIGIN = configService.get<string>(
     'CORS_ORIGIN',
-    'https://fullstack-kkbbghbia-iqbalmdevs-projects.vercel.app/',
+    'https://fullstack-sandy-zeta.vercel.app/',
   ); // CORS origin
 
   app.enableCors({

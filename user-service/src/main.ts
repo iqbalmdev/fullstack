@@ -19,7 +19,7 @@ async function bootstrap() {
   const TCP_AUTH_PORT = configService.get<number>('TCP_AUTH_PORT', 5002); // TCP port for Auth Service
   const CORS_ORIGIN = configService.get<string>(
     'CORS_ORIGIN',
-    'https://fullstack-kkbbghbia-iqbalmdevs-projects.vercel.app/',
+    'https://fullstack-sandy-zeta.vercel.app/',
   ); // CORS origin
 
   // Enable CORS globally

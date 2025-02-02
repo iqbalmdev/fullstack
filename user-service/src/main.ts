@@ -1,35 +1,37 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { ConfigService } from '@nestjs/config';
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config({
+  path: process.cwd() + `/.env.${process.env.NODE_ENV || 'development'}`,
+});
 
 async function bootstrap() {
-  const HTTP_PORT = 4201; // HTTP API Server
-  const TCP_AUTH_PORT = 5002; // TCP port for Auth Service
-
-  // Create HTTP API Server
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
+  // Log the HTTP_PORT value
+  const HTTP_PORT = configService.get<number>('HTTP_PORT', 5001);
+  console.log('HTTP_PORT:', HTTP_PORT); // This should log the correct value
+
+  const TCP_AUTH_PORT = configService.get<number>('TCP_AUTH_PORT', 5002); // TCP port for Auth Service
+  const CORS_ORIGIN = configService.get<string>(
+    'CORS_ORIGIN',
+    'https://fullstack-kkbbghbia-iqbalmdevs-projects.vercel.app/',
+  ); // CORS origin
 
   // Enable CORS globally
   app.enableCors({
-    origin: 'https://fullstack-ten-gamma.vercel.app/', // Allow requests from localhost:3000
-    methods: 'GET, POST, PUT, DELETE, OPTIONS', // Allow these methods
-    allowedHeaders: 'Content-Type, Authorization', // Allow these headers
-    credentials: true, // Allow credentials
+    origin: CORS_ORIGIN,
+    methods: 'GET, POST, PUT, DELETE, OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
   });
 
   await app.listen(HTTP_PORT);
   console.log(`🚀 User Service HTTP server running at: ${await app.getUrl()}`);
-
-  // // Connect to the Auth Service via TCP
-  // app.connectMicroservice<MicroserviceOptions>({
-  //   transport: Transport.TCP,
-  //   options: { host: '127.0.0.1', port: 5002 },
-  // });
-
-  // await app.startAllMicroservices();
-  // console.log(
-  //   `📡 User Service connected to Auth Service on TCP port ${TCP_AUTH_PORT}`,
-  // );
 }
 
 bootstrap();

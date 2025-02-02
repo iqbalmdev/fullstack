@@ -1,17 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-
+import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
-  const HTTP_PORT = 5001; // HTTP API Server
+  // HTTP API Server
   const TCP_PORT = 5002; // TCP Microservice for token validation
 
   // Create HTTP API Server
   const app = await NestFactory.create(AppModule);
-
+  const configService = app.get(ConfigService);
+  const HTTP_PORT = configService.get<number>('HTTP_PORT', 5001);
   // Enable CORS for HTTP API
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const CORS_ORIGIN = configService.get<string>(
+    'CORS_ORIGIN',
+    'https://fullstack-kkbbghbia-iqbalmdevs-projects.vercel.app/',
+  ); // CORS origin
+
   app.enableCors({
-    origin: 'https://fullstack-ten-gamma.vercel.app',
+    origin: CORS_ORIGIN,
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true,

@@ -1,7 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_BASE = process.env.AUTH_URL || "http://localhost:5001";
+
+const API_BASE = process.env.NODE_ENV === 'development' ?"http://localhost:5001" : 'https://fullstack-1-gjel.onrender.com'
 
 // Create an Axios instance
 const authApi = axios.create({

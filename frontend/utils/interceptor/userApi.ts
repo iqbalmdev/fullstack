@@ -1,7 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import {appEnv} from "../../app/config/varibales"
 
-const API_BASE = process.env.USER_URL || "http://localhost:4201";
+console.log(appEnv,"See appENv")
+const nodeEnv= process.env.NODE_ENV;
+
+const API_BASE = nodeEnv === 'development' ?   "http://localhost:4201" : 'https://fullstack-zsdg.onrender.com';
 
 // Create an Axios instance
 const userApi = axios.create({

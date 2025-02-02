@@ -1,3 +1,80 @@
+# Fullstack Assignment - Microservices Architecture
+
+## Project Overview
+
+This project was initially designed to include only the **User Service** microservice. However, to demonstrate microservice architecture, I have also implemented an **Auth Service** for authentication and token validation. The project follows a **microservices-based approach**, where different services handle different functionalities independently.
+
+---
+
+## Overall Project Structure
+
+```
+fullstack/
+├── frontend/               # Next.js frontend application
+├── auth-service/           # NestJS authentication microservice
+├── user-service/           # NestJS user management microservice
+└── docker-compose.yml      # Docker setup to run all services
+```
+
+---
+
+# Running the Entire Application with Docker
+
+
+
+To run all services together, we use **Docker Compose**. This will set up the **frontend, auth service, and user service** within a single environment.
+
+## Prerequisites
+
+Ensure you have the following installed:
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Steps to Run the Project
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/iqbalmdev/fullstack.git
+   cd fullstack
+   ```
+
+2. **Create a `.env` file** for environment variables:
+   ```bash
+   touch .env
+   ```
+   
+   Add the following to the `.env` file:
+   ```
+   NEXT_PUBLIC_AUTH_URL=http://auth-service:5001
+   NEXT_PUBLIC_USER_URL=http://user-service:4201
+   ```
+
+3. **Run the project using Docker Compose**
+   ```bash
+   docker-compose up --build
+   ```
+   This will:
+   - Start the **Frontend (Next.js)**
+   - Start the **User Service (NestJS)**
+   - Start the **Auth Service (NestJS)**
+
+4. **Access the services** in your browser:
+   - **Frontend:** [http://localhost:3000](http://localhost:3000)
+   - **User Service:** [http://localhost:4201](http://localhost:4201)
+   - **Auth Service:** [http://localhost:5001](http://localhost:5001)
+
+### Stopping the Containers
+
+To stop all running containers, use:
+```bash
+docker-compose down
+```
+This will gracefully shut down all services and free up ports.
+
+-------
+
+
 # Frontend - Fullstack Assignment
 
 ## Overview
@@ -63,8 +140,10 @@ Create a `.env.local` file in the root directory and add:
 ```
 NEXT_PUBLIC_AUTH_URL=<auth-service-url>
 NEXT_PUBLIC_USER_URL=<user-service-url>
-NEXT_PUBLIC_ADMIN_EMAIL=iqbal@gmail.com
-NEXT_PUBLIC_ADMIN_PASSWORD=test.io
+--
+## For testing the website 
+email = iqbal@gmail.com
+password = test.io
 ```
 
 ---
@@ -74,7 +153,7 @@ NEXT_PUBLIC_ADMIN_PASSWORD=test.io
 ### Prerequisites
 
 - Node.js & npm
-- Docker (optional)
+
 
 ### Steps to Run Locally
 
@@ -92,7 +171,7 @@ NEXT_PUBLIC_ADMIN_PASSWORD=test.io
    npm run dev
    ```
 
-### Run with Docker
+### Run with Docker (optional)
 
 1. Build the Docker image:
    ```bash

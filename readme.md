@@ -1,8 +1,63 @@
 # Fullstack Assignment - Microservices Architecture
 
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Project Overview](#Project-Demo)
+- [Final Note](#final-note)
+- [Overall Project Structure](#overall-project-structure)
+- [Implementing TCP Communication Between Microservices](#Implementing-TCP-Communication-Between-Microservices)
+- [Final Note](#Final-Note)
+- [Running the Entire Application with Docker](#Running-the-Entire-Application-with-Docker)
+- [Frontend - Fullstack Assignment](#Overview)
+- [Frontend - Fullstack Assignment](#Overview-auth-service)
+- [Frontend - Fullstack Assignment](#Overview-user-service)
+
+
 ## Project Overview
 
 This project was initially designed to include only the **User Service** microservice. However, to demonstrate microservice architecture, I have also implemented an **Auth Service** for authentication and token validation. The project follows a **microservices-based approach**, where different services handle different functionalities independently. Moreover, the task was initially given with only one microservice, which was the User Service. To demonstrate microservice architecture, I have added the Auth Service so that they individually work as independent microservices.
+
+## Project Demo
+
+
+#### Overview
+In this demo, i showcase a full-stack application that consists of a frontend hosted on Vercel and a backend hosted on Render. This setup allows for seamless integration between the client and server, providing a smooth user experience.
+
+#### Frontend: Vercel
+- **Hosting Platform**: The frontend of the application is hosted on Vercel, a platform optimized for frontend frameworks and static sites. Vercel provides features such as automatic deployments, serverless functions, and global CDN, ensuring fast load times and scalability.
+  
+- **Framework**: The frontend is built using React, which allows for a dynamic and responsive user interface. The application leverages React's component-based architecture to create reusable UI components.
+
+- **Environment Variables**: To manage sensitive information and configuration settings, environment variables are used. For instance, the API base URL is stored in an environment variable prefixed with `NEXT_PUBLIC_AUTH_URL`, ensuring that it is accessible during the build process.
+
+- **Deployment**: The deployment process is streamlined with Vercel. Every push to the main branch triggers an automatic deployment, making it easy to keep the live application up-to-date with the latest changes.
+
+- **Demo URL**: You can access the live demo of the application at [https://fullstack-sandy-zeta.vercel.app/](https://fullstack-sandy-zeta.vercel.app/).
+
+#### Backend: Render
+- **Hosting Platform**: The backend of the application is hosted on Render, a cloud platform that provides a simple way to deploy web applications and APIs. Render offers features such as automatic scaling, managed databases, and easy integration with GitHub for continuous deployment.
+
+- **Framework**: The backend is built using NestJS, a progressive Node.js framework for building efficient and scalable server-side applications. NestJS utilizes TypeScript, providing strong typing and modern JavaScript features.
+
+- **Database**: The backend connects to a MongoDB database, which is used to store user data and application state. The connection string for the database is managed through environment variables, ensuring that sensitive information is not hardcoded in the source code.
+
+- **API Endpoints**: The backend exposes RESTful API endpoints that the frontend can consume. These endpoints handle various operations such as user authentication, data retrieval, and data manipulation.
+
+#### Integration
+- **Communication**: The frontend communicates with the backend through HTTP requests. Axios is used as the HTTP client to make API calls, and it is configured to include authentication tokens in the headers for secure access.
+
+- **CORS Configuration**: CORS (Cross-Origin Resource Sharing) is configured on the backend to allow requests from the frontend's domain, ensuring that the two applications can interact without security issues.
+
+#### Credentials for Demo
+To test the application, you can use the following credentials:
+- **Email**: `iqbal@gmail.com`
+- **Password**: `test.io`
+
+#### Conclusion
+This demo highlights the capabilities of modern web development by showcasing a full-stack application that utilizes Vercel for the frontend and Render for the backend. The combination of these technologies allows for a robust, scalable, and efficient application that can handle user interactions seamlessly. 
+
+By hosting the frontend and backend on platforms designed for their respective technologies, we ensure optimal performance and ease of maintenance, making it easier to focus on developing features and improving user experience.
 
 ## Implementing TCP Communication Between Microservices
 
@@ -118,7 +173,7 @@ bootstrap();
 
 I have successfully implemented the microservices architecture with inter-service communication using TCP. However, due to time constraints, I was unable to further optimize and extend the implementation. There are several additional improvements that can be made, such as implementing advanced authentication mechanisms, error handling, and adding logging for better observability.
 
-This project still provides a strong foundation for microservices communication and authentication handling in a distributed system.
+This project still provides a strong foundation for microservices communication and authentication handling in a distributed system. This is the way to make a connection between microservices, but I faced some errors during integration, so I just made them microservices running independently.
 
 
 
@@ -354,7 +409,7 @@ I'll structure the **Auth Service** README so that you can append it below the *
 
 # Backend - Auth Service (Fullstack Assignment)
 
-## Overview
+## Overview-auth-service
 
 The **Auth Service** is a microservice responsible for authentication and authorization in the Fullstack Assignment project. It is built using **NestJS** with **MongoDB** for storage and **JWT** for authentication. It exposes both **HTTP** and **TCP** endpoints for token validation and user authentication.
 
@@ -501,7 +556,7 @@ Here’s the **User Service README** that fits seamlessly with your frontend and
 
 # Backend - User Service (Fullstack Assignment)
 
-## Overview
+## Overview-user-service
 
 The **User Service** is a microservice responsible for managing user-related operations such as registration, retrieval, updates, and deletions. It is built using **NestJS** with **MongoDB** as the database and interacts with the **Auth Service** for token validation.  
 

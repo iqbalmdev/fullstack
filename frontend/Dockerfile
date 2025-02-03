@@ -20,8 +20,8 @@ RUN npm run build
 EXPOSE 3000
 
 # Set the environment variables to configure API URLs
-ENV AUTH_URL=http://auth-service:5001
-ENV USER_URL=http://user-service:4201
+ENV NEXT_PUBLIC_AUTH_URL=http://localhost:5001
+ENV NEXT_PUBLIC_USER_URL=http://localhost:4001
 
 # Start the Next.js application
 CMD ["npm", "run", "start"]

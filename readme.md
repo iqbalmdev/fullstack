@@ -212,7 +212,7 @@ Ensure you have the following installed:
    cd fullstack
    ```
 
-2. **Create a `.env` file** for environment variables:
+2. **Create a `.env` file** for environment variables in the front end folder:
    ```bash
    touch .env
    ```

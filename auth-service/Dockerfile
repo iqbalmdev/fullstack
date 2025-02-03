@@ -18,8 +18,8 @@ COPY . .
 EXPOSE 5001
 
 # Set environment variables
-ENV HTTP_PORT=5001
-ENV TCP_PORT=5002
+ENV NEXT_PUBLIC_AUTH_URL=http://auth-service:5001
+ENV NEXT_PUBLIC_USER_URL=http://user-service:4001
 
 # Start the service
 CMD ["npm", "run", "start"]

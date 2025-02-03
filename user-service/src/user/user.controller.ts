@@ -60,6 +60,10 @@ export class UserController {
     return await this.userService.findUserById(id);
   }
 
+  @Get('dummy')
+  getHello(): string {
+    return '✅ Server is alive!';
+  }
   @Put(':id')
   async updateUser(
     @Param('id') id: string,

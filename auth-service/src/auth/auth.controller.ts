@@ -4,6 +4,7 @@ import {
   Body,
   BadRequestException,
   Options,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MessagePattern,ClientProxy,ClientProxyFactory,Transport,Payload } from '@nestjs/microservices';
@@ -38,7 +39,10 @@ export class AuthController {
     }
     return this.authService.login(user);
   }
-
+  @Get('dummy')
+  getHello(): string {
+    return '✅ Server is alive!';
+  }
   // 🔵 Signup Route
   @Post('signup')
   async signup(

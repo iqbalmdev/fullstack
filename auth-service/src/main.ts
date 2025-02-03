@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import axios from 'axios';
 // import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   // HTTP API Server
@@ -39,6 +40,18 @@ async function bootstrap() {
 
   await app.startAllMicroservices();
   console.log(`📡 Auth Service TCP microservice running on port ${TCP_PORT}`);
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  setInterval(async () => {
+    try {
+      const response = await axios.get(
+        `https://fullstack-1-gjel.onrender.com/dummy`,
+      );
+      console.log(`Dummy API Called: ${response.data}`);
+    } catch (error) {
+      console.error('Error calling dummy API:', error);
+    }
+  }, 1000); // 1000ms = 1 second
+
 }
 
 bootstrap();

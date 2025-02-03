@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
+import axios from 'axios';
 
 // Load environment variables from .env file
 dotenv.config({
@@ -10,15 +11,13 @@ dotenv.config({
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Log the HTTP_PORT value
   const HTTP_PORT = 4001;
-  console.log('HTTP_PORT:', HTTP_PORT); // This should log the correct value
+  console.log('HTTP_PORT:', HTTP_PORT);
 
-  // const TCP_AUTH_PORT = configService.get<number>('TCP_AUTH_PORT', 5002); // TCP port for Auth Service
   const CORS_ORIGIN = [
     'http://localhost:3000',
     'https://fullstack-sandy-zeta.vercel.app',
-    'https://your-new-origin.com', // Add your new origins here
+    'https://your-new-origin.com',
     'https://another-allowed-origin.com',
   ];
 
@@ -32,6 +31,19 @@ async function bootstrap() {
 
   await app.listen(HTTP_PORT);
   console.log(`🚀 User Service HTTP server running at: ${await app.getUrl()}`);
+
+  // 🔹 Call Dummy API Every Second
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  setInterval(async () => {
+    try {
+      const response = await axios.get(
+        `https://fullstack-zsdg.onrender.com/dummy`,
+      );
+      console.log(`Dummy API Called: ${response.data}`);
+    } catch (error) {
+      console.error('Error calling dummy API:', error);
+    }
+  }, 1000); // 1000ms = 1 second
 }
 
 bootstrap();

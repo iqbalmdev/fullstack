@@ -43,7 +43,7 @@ async function bootstrap() {
     } catch (error) {
       console.error('Error calling dummy API:', error);
     }
-  }, 5000); // 1000ms = 1 second
+  }, 8000); // 1000ms = 1 second
 }
 
 bootstrap();

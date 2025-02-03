@@ -39,7 +39,7 @@ export class AuthController {
     }
     return this.authService.login(user);
   }
-  @Get('dummy')
+  @Get('dummy/live')
   getHello(): string {
     return '✅ Server is alive!';
   }

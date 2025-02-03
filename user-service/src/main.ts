@@ -33,11 +33,11 @@ async function bootstrap() {
   console.log(`🚀 User Service HTTP server running at: ${await app.getUrl()}`);
 
   // 🔹 Call Dummy API Every Second
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  //eslint-disable-next-line @typescript-eslint/no-misused-promises
   setInterval(async () => {
     try {
       const response = await axios.get(
-        `https://fullstack-zsdg.onrender.com/dummy`,
+        `https://fullstack-zsdg.onrender.com/users/dummy/live`,
       );
       console.log(`Dummy API Called: ${response.data}`);
     } catch (error) {

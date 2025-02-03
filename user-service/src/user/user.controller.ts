@@ -60,10 +60,10 @@ export class UserController {
     return await this.userService.findUserById(id);
   }
 
-  @Get('dummy')
-  getHello(): string {
-    return '✅ Server is alive!';
-  }
+  // @Get('dummy')
+  // getHello(): string {
+  //   return '✅ Server is alive!';
+  // }
   @Put(':id')
   async updateUser(
     @Param('id') id: string,
@@ -81,7 +81,11 @@ export class UserController {
     @Headers('Authorization') authorization: string,
   ): Promise<{ message: string }> {
     // Validate the token before deleting the user
-    await this.validateToken(authorization); // Token validation
+    this.validateToken(authorization); // Token validation
     return await this.userService.deleteUser(id);
+  }
+  @Get('dummy/live')
+  getHello(): string {
+    return '✅ Server is alive!';
   }
 }

@@ -44,7 +44,7 @@ async function bootstrap() {
   setInterval(async () => {
     try {
       const response = await axios.get(
-        `https://fullstack-1-gjel.onrender.com/dummy`,
+        `https://fullstack-1-gjel.onrender.com/auth/dummy/live`,
       );
       console.log(`Dummy API Called: ${response.data}`);
     } catch (error) {

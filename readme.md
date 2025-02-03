@@ -220,7 +220,7 @@ Ensure you have the following installed:
    Add the following to the `.env` file:
    ```
    NEXT_PUBLIC_AUTH_URL=http://auth-service:5001
-   NEXT_PUBLIC_USER_URL=http://user-service:4201
+   NEXT_PUBLIC_USER_URL=http://user-service:4001
    ```
 
 3. **Run the project using Docker Compose**

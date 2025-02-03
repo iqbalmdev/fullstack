@@ -219,8 +219,8 @@ Ensure you have the following installed:
    
    Add the following to the `.env` file:
    ```
-   NEXT_PUBLIC_AUTH_URL=http://auth-service:5001
-   NEXT_PUBLIC_USER_URL=http://user-service:4001
+   NEXT_PUBLIC_AUTH_URL=http://localhost:5001
+   NEXT_PUBLIC_USER_URL=http://localhost:4001
    ```
 
 3. **Run the project using Docker Compose**
@@ -636,7 +636,7 @@ TCP_AUTH_PORT=5002
    ```
 4. The **User Service HTTP API** will be available at:
    ```
-   http://localhost:4201
+   http://localhost:4001
    ```
 5. The **TCP Microservice** will be available on:
    ```
@@ -653,7 +653,7 @@ TCP_AUTH_PORT=5002
    ```
 2. Run the container:
    ```bash
-   docker run -p 4201:4201 user-service
+   docker run -p 4001:4001 user-service
    ```
 
 ---
@@ -775,7 +775,7 @@ Ensure you have the following installed:
 
 4. **Access the services** in your browser:  
    - **Frontend:** [http://localhost:3000](http://localhost:3000)  
-   - **User Service:** [http://localhost:4201](http://localhost:4201)  
+   - **User Service:** [http://localhost:4201](http://localhost:4001)  
    - **Auth Service:** [http://localhost:5001](http://localhost:5001)  
 
 ---

@@ -234,8 +234,8 @@ Ensure you have the following installed:
 
 4. **Access the services** in your browser:
    - **Frontend:** [http://localhost:3000](http://localhost:3000)
-   - **User Service:** [http://localhost:4201](http://localhost:4201)
-   - **Auth Service:** [http://localhost:5001](http://localhost:5001)
+   - **User Service:** [http://localhost:4001](http://localhost:4001)
+   - **Auth Service:** [http://localhost:5002](http://localhost:5001)
 
 ### Stopping the Containers
 

@@ -14,10 +14,10 @@ RUN npm install
 COPY . .
 
 # Expose HTTP port for the API
-EXPOSE 4201
+EXPOSE 4001
 
 # Set the environment variables
-ENV HTTP_PORT=4201
+ENV HTTP_PORT=4001
 ENV TCP_AUTH_PORT=5002
 
 # Start the user service

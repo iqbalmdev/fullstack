@@ -21,10 +21,10 @@ services:
       context: ./user-service  # Path to your user service folder
       dockerfile: Dockerfile  # Path to the user service Dockerfile
     ports:
-      - "4201:4201"  # Expose user service to localhost:4201
+      - "4001:4001"  # Expose user service to localhost:4201
     environment:
-      - HTTP_PORT=4201
-      - TCP_AUTH_PORT=5002
+      - HTTP_PORT=4001
+      - TCP_AUTH_PORT=4002
     depends_on:
       - auth-service
     networks:
@@ -38,7 +38,7 @@ services:
       - "5001:5001"  # Expose auth service to localhost:5001
     environment:
       - HTTP_PORT=5001
-      - TCP_PORT=5002
+      - TCP_PORT=4002
     networks:
       - app-network
 

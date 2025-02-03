@@ -2,7 +2,125 @@
 
 ## Project Overview
 
-This project was initially designed to include only the **User Service** microservice. However, to demonstrate microservice architecture, I have also implemented an **Auth Service** for authentication and token validation. The project follows a **microservices-based approach**, where different services handle different functionalities independently.
+This project was initially designed to include only the **User Service** microservice. However, to demonstrate microservice architecture, I have also implemented an **Auth Service** for authentication and token validation. The project follows a **microservices-based approach**, where different services handle different functionalities independently. Moreover, the task was initially given with only one microservice, which was the User Service. To demonstrate microservice architecture, I have added the Auth Service so that they individually work as independent microservices.
+
+## Implementing TCP Communication Between Microservices
+
+To enable communication between **User Service** and **Auth Service**, I have implemented **TCP-based inter-service communication**. Here are the steps to achieve this:
+
+### 1️⃣ Setup Microservices Client in `UserModule`
+Modify `UserModule` to register the Auth Service as a microservice client:
+
+```typescript
+import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { UserService } from './user.service';
+import { UserController } from './user.controller';
+
+@Module({
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'AUTH_SERVICE',
+        transport: Transport.TCP,
+        options: { host: 'localhost', port: 4000 },
+      },
+    ]),
+  ],
+  controllers: [UserController],
+  providers: [UserService],
+})
+export class UserModule {}
+```
+
+### 2️⃣ Modify `UserController` to Validate Tokens via Auth Service
+```typescript
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  Headers,
+  UnauthorizedException,
+  Inject,
+} from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { UserService } from './user.service';
+import { firstValueFrom } from 'rxjs';
+
+@Controller('users')
+export class UserController {
+  constructor(
+    private readonly userService: UserService,
+    @Inject('AUTH_SERVICE') private readonly authClient: ClientProxy,
+  ) {}
+
+  private async validateToken(authorization: string) {
+    if (!authorization) {
+      throw new UnauthorizedException('Authorization token is required');
+    }
+    const token = authorization.split(' ')[1];
+    try {
+      const response = await firstValueFrom(
+        this.authClient.send({ cmd: 'validate_token' }, { token }),
+      );
+      if (!response || !response.isValid) {
+        throw new UnauthorizedException('Invalid or expired token');
+      }
+      return response.user;
+    } catch (error) {
+      throw new UnauthorizedException('Token validation failed');
+    }
+  }
+}
+```
+
+### 3️⃣ Modify `AuthController` to Handle Token Validation Requests
+```typescript
+import { Controller } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+
+@Controller('auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
+  @MessagePattern({ cmd: 'validate_token' })
+  async validateToken(@Payload() data: { token: string }) {
+    const isValid = await this.authService.validateToken(data.token);
+    return { isValid: !!isValid, user: isValid };
+  }
+}
+```
+
+### 4️⃣ Start Auth Service as a TCP Server
+Modify `auth-service/main.ts`:
+```typescript
+import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { AuthModule } from './auth.module';
+
+async function bootstrap() {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AuthModule, {
+    transport: Transport.TCP,
+    options: { host: 'localhost', port: 4000 },
+  });
+
+  await app.listen();
+}
+bootstrap();
+```
+
+## Final Note
+
+I have successfully implemented the microservices architecture with inter-service communication using TCP. However, due to time constraints, I was unable to further optimize and extend the implementation. There are several additional improvements that can be made, such as implementing advanced authentication mechanisms, error handling, and adding logging for better observability.
+
+This project still provides a strong foundation for microservices communication and authentication handling in a distributed system.
+
+
 
 ---
 
@@ -225,12 +343,7 @@ The **Axios interceptors** play a crucial role in handling authentication and se
 
 ---
 
-## Contributing
 
-1. Fork the repository.
-2. Create a new branch.
-3. Commit your changes.
-4. Open a pull request.
 
 ---
 
